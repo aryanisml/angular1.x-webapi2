@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Add Shipping Information</title>
+    <script src="../Scripts/jquery-1.9.1.min.js"></script>
+</head>
+<body>
+    <div>
+        <div>
+            <label>Company Name</label>
+            <input type="text" name="name" id="txtCompanyName"/>
+        </div>
+        <div>
+            <label>Phone No</label>
+            <input type="text" name="name" id="txtPhoneNo" />
+        </div>
+        <div>
+            <input type="submit" value="Save" id="btnSave" />
+        </div>
+    </div>
+</body>
+    
+</html>
+<script>
+
+    $(document).ready(function () {
+
+        function saveData() {
+
+            var ShippingRequest = {
+                CompanyName: $("#txtCompanyName").val(),
+                Phone : $("#txtPhoneNo").val()
+
+            }
+
+
+            $.ajax({
+
+                url: "http://localhost:63025/test/postlearn",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(ShippingRequest),
+                success: function (result) {
+                    alert(result.success);
+                    $("#txtPhoneNo").val('');
+                    $("#txtCompanyName").val('');
+                },
+                error: function myfunction() {
+                    alert("Miss");
+                }
+
+
+
+
+            });
+
+
+        }
+
+        $("#btnSave").on("click", saveData);
+
+    });
+
+
+</script>
